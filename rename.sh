@@ -15,12 +15,12 @@ find "$folder_path" -type f -print0 | while IFS= read -r -d '' file; do
         filename=$(basename "$file")
         extension="${filename##*.}"
         filename_no_ext="${filename%.*}"
-        new_filename="${filename_no_ext}_${suffix}_${dirname_path##*/}.${extension}"
+        new_filename="${filename_no_ext}_${dirname_path##*/}_${suffix}.${extension}"
         new_file_path="${dirname_path}/${new_filename}"
         cp "$file" "$new_file_path"
 
         # ファイルを移動
-        results_path="${results_folder_path}/${filename_no_ext}_${suffix}_${dirname_path##*/}.${extension}"
+        results_path="${results_folder_path}/${new_filename}"
         echo "File moved to $results_path"
         mv "$new_file_path" "$results_path"
     fi
